@@ -1,11 +1,12 @@
 ﻿using Humanizer;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using static System.Net.Mime.MediaTypeNames;
 
 
 namespace HighFantasyStore.Server.Models
 {
-    public class WeaponsEntity
+    public class Weapons
     {
         [Key]
         public int Id { get; set; }
@@ -17,8 +18,8 @@ namespace HighFantasyStore.Server.Models
         public string Name { get; set; }
 
         public string Properties { get; set; }
-        
-        public int Magic { get; set; }
+        [ForeignKey("magic")]
+        public int Magicid { get; set; }
 
         public int quantity { get; set; }
 
