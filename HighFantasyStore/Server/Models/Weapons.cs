@@ -13,13 +13,13 @@ namespace HighFantasyStore.Server.Models
 
         public int Price { get; set; }
 
-        public enum Rarity { }
+        public rarity Rarity { get; set; }
 
         public string Name { get; set; }
 
-        public string Properties { get; set; }
+        public string properties { get; set; }
         [ForeignKey("magic")]
-        public int Magicid { get; set; }
+        public int MagicId { get; set; }
 
         public int quantity { get; set; }
 

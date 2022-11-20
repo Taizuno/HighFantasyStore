@@ -16,5 +16,7 @@ namespace HighFantasyStore.Server.Data
 
         public DbSet<Magic> Magics { get; set; }
         public DbSet<Weapons> Weapons { get; set; }
+        public DbSet<Armor> Armors { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
     }
 }

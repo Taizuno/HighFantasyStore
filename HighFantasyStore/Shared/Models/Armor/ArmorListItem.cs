@@ -13,7 +13,7 @@ namespace HighFantasyStore.Shared.Models.Armor
         public int Price { get; set; }
         public rarity Rarity { get; set; }
         public string Name { get; set; }
-        public string properties { get; set; 
+        public string properties { get; set; } 
         public int MagicID { get; set; }
         public int quantity { get; set; }
     }

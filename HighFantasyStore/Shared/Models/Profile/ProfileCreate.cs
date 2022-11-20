@@ -11,11 +11,8 @@ namespace HighFantasyStore.Shared.Models.profile
     {
         [Required]
         public int id { get; set; }
-        required
-        public int Ownerid
-        { get; set; }
+        [Required]
+        public int Ownerid { get; set; }
         public int gold { get; set; }
-        public List<Weapons> WeaponsOwned { get; set; }
-        public List<Armor> ArmorOwned { get; set; }
     }
 }
