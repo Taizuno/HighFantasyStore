@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HighFantasyStore.Shared.Models.Armor
+namespace HighFantasyStore.Shared.Models.Armors
 {
-    internal class ArmorEdit
+    public class ArmorEdit
     {
         public int Id { get; set; }
         public int Price { get; set; }

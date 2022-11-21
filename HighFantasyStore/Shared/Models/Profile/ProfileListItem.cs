@@ -10,7 +10,7 @@ namespace HighFantasyStore.Shared.Models.Profile
     {
         public int Id { get; set; }
         public int gold { get; set; }
-        public List<Weapons> WeaponsOwned { get; set; }
+        public List<Weapon> WeaponsOwned { get; set; }
         public List<Armor> ArmorOwned { get; set; }
     }
 }

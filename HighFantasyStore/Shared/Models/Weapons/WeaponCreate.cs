@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HighFantasyStore.Shared.Models.Weapons
 {
-    internal class WeaponCreate
+    public class WeaponCreate
     {
         public int Id { get; set; }
         public int Price { get; set; }

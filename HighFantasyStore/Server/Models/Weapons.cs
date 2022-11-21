@@ -6,7 +6,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace HighFantasyStore.Server.Models
 {
-    public class Weapons
+    public class Weapon
     {
         [Key]
         public int Id { get; set; }

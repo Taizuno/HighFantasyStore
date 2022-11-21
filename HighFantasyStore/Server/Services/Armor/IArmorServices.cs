@@ -1,4 +1,5 @@
-﻿namespace HighFantasyStore.Server.Services.Armor
+﻿using HighFantasyStore.Shared.Models.Armors;
+namespace HighFantasyStore.Server.Services.Armors
 {
     public interface IArmorServices
     {

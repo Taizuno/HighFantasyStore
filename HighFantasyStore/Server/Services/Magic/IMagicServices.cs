@@ -1,6 +1,7 @@
-﻿namespace HighFantasyStore.Server.Services.Magic
+﻿using HighFantasyStore.Shared.Models.Magics;
+namespace HighFantasyStore.Server.Services.Magics
 {
-    public class IMagicServices
+    public interface IMagicServices
     {
         Task<bool> CreateMagicAsync(MagicCreate model);
         Task<IEnumerable<MagicListItem>> GetAllMagicAsync();

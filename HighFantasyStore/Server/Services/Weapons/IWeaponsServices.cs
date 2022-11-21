@@ -1,8 +1,10 @@
-﻿namespace HighFantasyStore.Server.Services.Weapons
+﻿using HighFantasyStore.Shared.Models.Weapons;
+
+namespace HighFantasyStore.Server.Services.Weapons
 {
-    public class IWeaponsServices
+    public interface IWeaponsServices
     {
-        Task<bool> CreateWeaponsAsync(WeaponsCreate model);
+        Task<bool> CreateWeaponsAsync(WeaponCreate model);
         Task<IEnumerable<WeaponsListItem>> GetAllWeaponsAsync();
         Task<WeaponsListItem> GetWeaponsByIdAsync(int weaponId);
         Task<bool> UpdateWeaponAsync(WeaponsEdit model);

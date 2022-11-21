@@ -1,4 +1,8 @@
 ﻿using HighFantasyStore.Server.Data;
+using HighFantasyStore.Server.Models;
+using HighFantasyStore.Shared.Models.Weapons;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 
 namespace HighFantasyStore.Server.Services.Weapons
 {
@@ -12,18 +16,19 @@ namespace HighFantasyStore.Server.Services.Weapons
         }
         private string _UserID;
         public void SetUserId(string userID) => _UserID = userID;
-        public async Task<bool> CreateWeaponsAsync(WeaponsCreate model)
+        public async Task<bool> CreateWeaponsAsync(WeaponCreate model)
         {
-            var ArmorEntity = new Weapons
+            var WeaponEntity = new Weapon
             {
+                Id =model.Id,
                 Price = model.Price,
                 Rarity = model.Rarity,
                 Name = model.Name,
-                proprerties = model.proprerties,
-                MagicID = model.MagicID,
+                properties = model.properties,
+                MagicId = model.MagicID,
                 quantity = model.quantity
             };
-            _context.Armors.Add(ArmorEntity);
+            _context.Weapons.Add(WeaponEntity);
             var numberOfChanges = await _context.SaveChangesAsync();
             return numberOfChanges == 1;
         }
@@ -39,10 +44,10 @@ namespace HighFantasyStore.Server.Services.Weapons
                         Name = n.Name,
                         Rarity = n.Rarity,
                         properties = n.properties,
-                        MagicId = n.MagicId,
+                        MagicID = n.MagicId,
                         quantity = n.quantity
                     });
-            return await WeaponsQuery.ToList();
+            return await WeaponsQuery.ToListAsync();
         }
         public async Task<WeaponsListItem> GetWeaponsByIdAsync(int weaponId)
         {
@@ -57,8 +62,8 @@ namespace HighFantasyStore.Server.Services.Weapons
                 Price = weaponEntity.Price,
                 Rarity = weaponEntity.Rarity,
                 Name = weaponEntity.Name,
-                proprerties = weaponEntity.proprerties,
-                MagicID = weaponEntity.MagicID,
+                properties = weaponEntity.properties,
+                MagicID = weaponEntity.MagicId,
                 quantity = weaponEntity.quantity
             };
             return detail;
@@ -70,8 +75,8 @@ namespace HighFantasyStore.Server.Services.Weapons
             entity.Price = model.Price;
             entity.Rarity = model.Rarity;
             entity.Name = model.Name;
-            entity.Proprerties = model.Proprerties;
-            entity.MagicID = model.MagicID;
+            entity.properties = model.properties;
+            entity.MagicId = model.MagicID;
             entity.quantity = model.quantity;
 
             return await _context.SaveChangesAsync() == 1;
@@ -84,4 +89,4 @@ namespace HighFantasyStore.Server.Services.Weapons
         }
     }
 }
-}
+

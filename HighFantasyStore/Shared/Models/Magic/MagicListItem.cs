@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HighFantasyStore.Shared.Models.Magic
+namespace HighFantasyStore.Shared.Models.Magics
 {
-    internal class MagicListItem
+    public class MagicListItem
     {
         [Required]
         public int Id { get; set; }

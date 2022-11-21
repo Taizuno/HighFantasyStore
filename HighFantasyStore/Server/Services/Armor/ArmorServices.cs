@@ -3,8 +3,9 @@ using HighFantasyStore.Server.Models;
 using Humanizer;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography.X509Certificates;
+using HighFantasyStore.Shared.Models.Armors;
 
-namespace HighFantasyStore.Server.Services.Armor
+namespace HighFantasyStore.Server.Services.Armors
 {
     public class ArmorServices : IArmorServices
     {
@@ -20,10 +21,11 @@ namespace HighFantasyStore.Server.Services.Armor
         {
             var ArmorEntity = new Armor
             {
+                Id = model.Id,
                 Price = model.Price,
                 Rarity = model.Rarity,
                 Name = model.Name,
-                proprerties = model.proprerties,
+                properties = model.properties,
                 MagicID = model.MagicID,
                 quantity = model.quantity
             };
@@ -46,7 +48,7 @@ namespace HighFantasyStore.Server.Services.Armor
                         MagicID = n.MagicID,
                         quantity = n.quantity
                     });
-            return await ArmorQuery.ToList();
+            return await ArmorQuery.ToListAsync();
         }
         public async Task<ArmorListItem> GetArmorByIdAsync(int armorId)
         {
@@ -61,7 +63,7 @@ namespace HighFantasyStore.Server.Services.Armor
                 Price = armorEntity.Price,
                 Rarity = armorEntity.Rarity,
                 Name = armorEntity.Name,
-                proprerties = armorEntity.proprerties,
+                properties = armorEntity.properties,
                 MagicID = armorEntity.MagicID,
                 quantity = armorEntity.quantity
             };
@@ -74,7 +76,7 @@ namespace HighFantasyStore.Server.Services.Armor
             entity.Price = model.Price;
             entity.Rarity = model.Rarity;
             entity.Name = model.Name;
-            entity.Proprerties = model.Proprerties;
+            entity.properties = model.properties;
             entity.MagicID = model.MagicID;
             entity.quantity = model.quantity;
 

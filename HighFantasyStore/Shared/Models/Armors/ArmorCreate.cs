@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HighFantasyStore.Shared.Models.Armor
+namespace HighFantasyStore.Shared.Models.Armors
 {
     public class ArmorCreate
     {

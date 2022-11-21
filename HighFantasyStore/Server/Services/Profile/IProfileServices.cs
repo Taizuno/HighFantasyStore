@@ -1,6 +1,7 @@
 ﻿namespace HighFantasyStore.Server.Services.Profile
 {
-    public class IProfileServices
+    public interface IProfileServices
     {
+        Task<bool> CreateProfileAsync();
     }
 }
