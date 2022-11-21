@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HighFantasyStore.Shared.Models.profile
+namespace HighFantasyStore.Shared.Models.profiles
 {
-    internal class ProfileCreate
+    public class ProfileCreate
     {
         [Required]
         public int id { get; set; }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HighFantasyStore.Shared.Models.Profile
+namespace HighFantasyStore.Shared.Models.Profiles
 {
     public class ProfileEdit
     {

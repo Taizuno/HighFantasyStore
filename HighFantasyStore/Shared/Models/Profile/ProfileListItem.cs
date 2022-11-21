@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HighFantasyStore.Shared.Models.Profile
+namespace HighFantasyStore.Shared.Models.Profiles
 {
-    internal class ProfileListItem
+    public class ProfileListItem
     {
         public int Id { get; set; }
         public int gold { get; set; }
