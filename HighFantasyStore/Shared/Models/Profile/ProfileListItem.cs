@@ -9,6 +9,7 @@ namespace HighFantasyStore.Shared.Models.Profiles
     public class ProfileListItem
     {
         public int Id { get; set; }
+        public string ownerId { get; set; }
         public int gold { get; set; }
         
     }

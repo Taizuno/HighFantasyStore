@@ -12,7 +12,8 @@ namespace HighFantasyStore.Shared.Models.profiles
         [Required]
         public int id { get; set; }
         [Required]
-        public int Ownerid { get; set; }
+        public string Ownerid { get; set; }
+        public string Name { get; set; }    
         public int gold { get; set; }
     }
 }

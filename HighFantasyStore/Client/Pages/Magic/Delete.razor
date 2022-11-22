@@ -1,14 +1,14 @@
-﻿@page "/Armor/delete/{ArmorId:int}"
-@using HighFantasyStore.Shared.Models.Armors
+﻿@page "/Magic/delete/{MagicId:int}"
+@using HighFantasyStore.Shared.Models.Magics
 @attribute [Authorize]
 @inject HttpClient http
 @inject NavigationManager navigation
-<h3>#@ArmorId</h3>
+<h3>#@MagicId</h3>
 @if(message != null)
 {
 	<h2 class="text-danger">@message</h2>
 }
-@if (Armor != null)
+@if (Magic != null)
 {
 
 }
@@ -18,24 +18,24 @@ else
 }
 @code {
 	[Parameter]
-	public int ArmorId { get; set; }
-	public ArmorListItem Armor {get; set;}
+	public int MagicId { get; set; }
+	public MagicListItem Magic {get; set;}
 	public string message { get; set; }
 
 	protected override async Task OnInitializedAsync()
 	{
-		Armor = await http.GetFromJsonAsync<ArmorListItem>($"/api/Armor/{ArmorId}");
+		Magic = await http.GetFromJsonAsync<MagicListItem>($"/api/Magic/{MagicId}");
 	}
 	private async void HandleClick()
 	{
-		var deleteRes = await http.DeleteAsync($"/api/Armor/{ArmorId}");
+		var deleteRes = await http.DeleteAsync($"/api/Magic/{MagicId}");
 		if(deleteRes.IsSuccessStatusCode)
 		{
-			navigation.NavigateTo("/Armor");
+			navigation.NavigateTo("/Magic");
 		}
 		else
 		{
-			message = "Failed to scrap your armor.";
+			message = "Failed to erase your Magic.";
 		}
 	}
 }

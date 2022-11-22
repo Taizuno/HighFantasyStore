@@ -1,48 +1,44 @@
-﻿@page "/Armor/{ArmorId:int}"
-@using HighFantasyStore.Shared.Models.Armors
+﻿@page "/Magic/{MagicId:int}"
+@using HighFantasyStore.Shared.Models.Magics
 @attribute [Authorize]
 @inject HttpClient http
 
-<h3>#@Armor.Name</h3>
+<h3>#@Magic.Id</h3>
 <td>
-	<a href=@($"Armor/{Armor.Id}")>Details</a>
-	<a href=@($"Armor/edit/{Armor.Id}")>Edit</a>
-	<a href=@($"Armor/delete/{Armor.Id}")>Delete</a>
+	<a href=@($"Magic/{Magic.Id}")>Details</a>
+	<a href=@($"Magic/edit/{Magic.Id}")>Edit</a>
+	<a href=@($"Magic/delete/{Magic.Id}")>Delete</a>
 </td>
-@if (Armor != null)
+@if (Magic != null)
 {
 	<div class="container">
 		<div class="card">
 			<div class="card-header d-flex justify-content-between">
-				<span>Armor #@Armor.Id</span>
-				<span class="text-muted"><strong>@Armor.MagicID</strong></span>
+				<span>Magic #@Magic.Id</span>
 			</div>
-			<div class="card-body">
-				<h4 class="card-title">@Armor.Name</h4>
-				<p class="card-text">@Armor.Price</p>
-			</div>
+			
 			<div class="card-footer text-muted d-flex justify-content-between">
-				<span class="text-left">@Armor.properties</span>
+				<span class="text-left">@Magic.Description</span>
 			</div>
 		</div>
 		<div class="d-flex justify-content-center mt-3">
 			<div class="text-center justify-content-between w-25">
-				<a href=@($"/armor/edit/{Id}") class="btn btn-outline-primary">Edit</a>
-				<a href=@($"/armor/delete/{Id}") class="btn btn-outline-danger">Delete</a>
+				<a href=@($"/Magic/edit/{Id}") class="btn btn-outline-primary">Edit</a>
+				<a href=@($"/Magic/delete/{Id}") class="btn btn-outline-danger">Delete</a>
 				<hr />
-				<a href="/note">Back to Armor Index</a>
+				<a href="/note">Back to Magic Index</a>
 			</div>
 		</div>
 	</div>
 }
 @code {
 	[Parameter]
-	public int ArmorId { get; set; }
-	public ArmorListItem Armor { get; set; }
+	public int Id { get; set; }
+	public MagicListItem Magic { get; set; }
 
 	protected override async Task OnInitializedAsync()
 	{
-		Armor = await http.GetFromJsonAsync<ArmorListItem>($"api/armor/{ArmorId}");
+		Magic = await http.GetFromJsonAsync<MagicListItem>($"api/Magic/{Id}");
 	}
 
 }

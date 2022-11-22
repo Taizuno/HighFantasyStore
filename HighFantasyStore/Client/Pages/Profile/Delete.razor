@@ -1,14 +1,14 @@
-﻿@page "/Armor/delete/{ArmorId:int}"
-@using HighFantasyStore.Shared.Models.Armors
+﻿@page "/profile/delete/{profileId:int}"
+@using HighFantasyStore.Shared.Models.Profiles
 @attribute [Authorize]
 @inject HttpClient http
 @inject NavigationManager navigation
-<h3>#@ArmorId</h3>
+<h3>#@profileId</h3>
 @if(message != null)
 {
 	<h2 class="text-danger">@message</h2>
 }
-@if (Armor != null)
+@if (profile != null)
 {
 
 }
@@ -18,24 +18,24 @@ else
 }
 @code {
 	[Parameter]
-	public int ArmorId { get; set; }
-	public ArmorListItem Armor {get; set;}
+	public int profileId { get; set; }
+	public ProfileListItem profile {get; set;}
 	public string message { get; set; }
 
 	protected override async Task OnInitializedAsync()
 	{
-		Armor = await http.GetFromJsonAsync<ArmorListItem>($"/api/Armor/{ArmorId}");
+		profile = await http.GetFromJsonAsync<ProfileListItem>($"/api/profile/{profileId}");
 	}
 	private async void HandleClick()
 	{
-		var deleteRes = await http.DeleteAsync($"/api/Armor/{ArmorId}");
+		var deleteRes = await http.DeleteAsync($"/api/profile/{profileId}");
 		if(deleteRes.IsSuccessStatusCode)
 		{
-			navigation.NavigateTo("/Armor");
+			navigation.NavigateTo("/profile");
 		}
 		else
 		{
-			message = "Failed to scrap your armor.";
+			message = "Failed to scrap your profile.";
 		}
 	}
 }
