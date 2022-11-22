@@ -1,10 +1,10 @@
 ﻿@page "/Magic/Index"
 @using HighFantasyStore.Shared.Models.Magics
-@inject HttpClient Http
+@inject HttpClient http
 @attribute [Authorize]
 <h3>Magic</h3>
 <a href="/magic/create">Make a Magic Effect</a>
-@if (Magics == null)
+@if (_Magics == null)
 {
 	<p><em>Loading...</em></p>
 }
@@ -12,6 +12,7 @@ else
 {
 
 }
+
 <table class="table">
 	<thead>
 		<tr>
@@ -20,7 +21,7 @@ else
 		</tr>
 	</thead>
 	<tbody>
-		@foreach (MagicListItem magic in Magics)
+		@foreach (MagicListItem magic in _Magics)
 		{
 			<tr>
 				<td>@magic.Id</td>
@@ -31,7 +32,11 @@ else
 </table>
 
 @code {
-    private List<MagicListItem> Magics;
-    protected override async Task OnInitializedAsync() => Magics = await Http.GetFromJasonAsync<List<MagicListItem>>("Magic");
+	private IEnumerable<MagicListItem> _Magics;
+	protected override async Task OnInitializedAsync()
+	{
+		_Magics = await http.GetFromJsonAsync<List<MagicListItem>>("/api/Magic");
+	}
+
 
 }

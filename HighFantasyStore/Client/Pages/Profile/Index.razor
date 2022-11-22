@@ -1,0 +1,42 @@
+﻿@page "/Profile"
+@using HighFantasyStore.Shared.Models.Profiles
+@attribute [Authorize]
+@inject HttpClient http
+<a href="/Profile/create"><h3>Make a Profile</h3></a>
+@if (_Profiles == null)
+{
+	<p><em>Loading...</em></p>
+}
+else
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var Profile in _Profiles)
+			{
+				<tr>
+					<td><strong>@Profile.Name</strong></td>
+					<td>
+						<a href=@($"Profile/{Profile.Id}")>Details</a>
+						<a href=@($"Profile/edit/{Profile.Id}")>Edit</a>
+						<a href=@($"Profile/delete/{Profile.Id}")>Delete</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+	@code {
+		private IEnumerable<ProfileListItem> _Profiles;
+		protected override async Task OnInitializedAsync()
+		{
+			_Profiles = await http.GetFromJsonAsync<List<ProfileListItem>>("/api/Profile");
+		}
+
+}

@@ -25,4 +25,13 @@
     <ProjectReference Include="..\Shared\HighFantasyStore.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Pages\Profile\Index.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Pages\Weapons\Index.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
+
 </Project>

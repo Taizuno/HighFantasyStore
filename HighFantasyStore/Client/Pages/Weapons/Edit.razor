@@ -22,7 +22,7 @@
 
 <button type="submit" class="btn btn-primary btn-block mt-5">Submit</button>
 @code {
-	private WeaponCreate model = new();
+	private WeaponsEdit model = new();
 	private IEnumerable<MagicListItem> magics;
 	private string errorMessage;
 	protected override async Task OnInitializedAsync()
@@ -31,7 +31,7 @@
 	}
 	private async void HandleSubmit()
 	{
-		var createRes = await http.PostAsJsonAsync<WeaponCreate>("/api/Weapon/", model);
+		var createRes = await http.PostAsJsonAsync<WeaponsEdit>("/api/Weapon/", model);
 		if (createRes.IsSuccessStatusCode)
 		{
 			navigation.NavigateTo("/Weapon");

@@ -20,40 +20,6 @@
 	<InputText class="form-control" @bind-Value="model.Name"/>
 </div>
 
-<div class="form-group">
-	<label>Price</label>
-	<InputText class="form-control" @bind-Value="model.Price"/>
-</div>
-
-<div class="form-group">
-	<label>Rarity</label>
-	<InputText class="form-control" @bind-Value="model.Rarity"/>
-</div>
-
-<div class="form-group">
-	<label>Properties</label>
-	<InputText class="form-control" @bind-Value="model.properties" />
-</div>
-
-<div class="form-group">
-	<label>Magic</label>
-	<InputText class="form-control" @bind-Value="model.MagicID" />
-</div>
-
-<div class="form-group">
-	<label>Quantity</label>
-	<InputText class="form-control" @bind-Value="model.quantity" />
-</div>
-		<InputSelect class="form-control" @bind-Value="model.MagicID">
-		@foreach (var magic in magics)
-		{
-			<option value="@magic.Id">@Magic.Description</option>
-		}
-		</InputSelect>
-		@if (magics == null)
-		{
-			<p><em>Loading...</em></p>
-		}else{}
 <button type="submit" class="btn btn-primary btn-block mt-5">Submit</button>
 @code {
 	[Parameter]
@@ -68,7 +34,7 @@
 	}
 	private async void HandleSubmit()
 	{
-		var createRes = await http.PostAsJsonAsync<ArmorCreate>("/api/Armor/edit/{ArmorId}", model);
+		var createRes = await http.PostAsJsonAsync<ArmorEdit>("/api/Armor/edit/{ArmorId}", model);
 		if (createRes.IsSuccessStatusCode)
 		{
 			navigation.NavigateTo("/Armor/{ArmorId}");

@@ -42,7 +42,7 @@
 
 	protected override async Task OnInitializedAsync()
 	{
-		Armor = await http.GetFromJsonAsync<ArmorListItem>($"api/armor/{ArmorId}");
+		Armor = await http.GetFromJsonAsync<ArmorListItem>($"api/armor/{Id}");
 	}
 
 }

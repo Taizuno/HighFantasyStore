@@ -1,0 +1,42 @@
+﻿@page "/Armor"
+@using HighFantasyStore.Shared.Models.Armors
+@attribute [Authorize]
+@inject HttpClient http
+<a href="/Armor/create">Forge Armor</a>
+@if (_Armors == null)
+{
+	<p><em>Loading...</em></p>
+}
+else
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var armor in _Armors)
+			{
+				<tr>
+					<td><strong>@armor.Name</strong></td>
+					<td>
+						<a href=@($"Armor/{armor.Id}")>Details</a>
+						<a href=@($"Armor/edit/{armor.Id}")>Edit</a>
+						<a href=@($"Armor/delete/{armor.Id}")>Delete</a>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+	@code {
+		private IEnumerable<ArmorListItem> _Armors;
+		protected override async Task OnInitializedAsync()
+		{
+			_Armors = await http.GetFromJsonAsync<List<ArmorListItem>>("/api/Armor");
+		}
+
+}
