@@ -8,7 +8,7 @@ namespace HighFantasyStore.Server.Services.Profiles
         Task<bool> DeleteProfileAsync(int profileId);
         Task<ProfileListItem> GetProfileByIdAsync(int profileId);
         Task<IEnumerable<ProfileListItem>> GetProfilesByOwnerAsync(int userId);
-        void SetUserId(int userId);
+        void SetUserId(string userId);
         Task<bool> UpdateProfileAsync(ProfileEdit model);
     }
 }

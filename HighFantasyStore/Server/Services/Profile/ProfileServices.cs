@@ -16,8 +16,8 @@ namespace HighFantasyStore.Server.Services.Profiles
         {
             _context = context;
         }
-        private int _UserId;
-        public void SetUserId(int userId) => _UserId = userId;
+        private string _UserId;
+        public void SetUserId(string userId) => _UserId = userId;
         public async Task<bool> CreateProfileAsync(ProfileCreate model)
         {
             var ProfileEntity = new Profile
@@ -51,8 +51,6 @@ namespace HighFantasyStore.Server.Services.Profiles
             {
                 Id = profileEntity.id,
                 gold = profileEntity.gold,
-                WeaponsOwned = profileEntity.WeaponsOwned,
-                ArmorOwned = profileEntity.ArmorOwned
             };
             return detail;
         }
@@ -66,8 +64,6 @@ namespace HighFantasyStore.Server.Services.Profiles
                 {
                     Id = n.id,
                     gold = n.gold,
-                    WeaponsOwned = n.WeaponsOwned,
-                    ArmorOwned = n.ArmorOwned
                 });
             return await ProfileQuery.ToListAsync();
         }
@@ -77,10 +73,9 @@ namespace HighFantasyStore.Server.Services.Profiles
             if (model == null) return false;
             var entity = await _context.Profiles.FindAsync(model.Id);
             entity.gold = model.gold;
-            entity.WeaponsOwned = model.WeaponsOwned;
-            entity.ArmorOwned = model.ArmorOwned;
 
             return await _context.SaveChangesAsync() == 1;
         }
+
     }
 }

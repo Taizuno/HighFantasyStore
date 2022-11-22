@@ -1,0 +1,78 @@
+﻿@page "/Armor/Create"
+@using HighFantasyStore.Shared.Models.Armors
+@attribute [Authorize]
+@inject HttpClient http
+@using HighFantasyStore.Shared.Models.Magics
+@inject NavigationManager navigation
+<h3>Create</h3>
+@if(errorMessage != null)
+{
+	<h5 class="text-danger">@errorMessage</h5>
+}
+<div>
+	<EditForm Model="@model" OnValidSubmit="@HandleSubmit">
+		<DataAnnotationsValidator/>
+		<ValidationSummary/>
+	</EditForm>
+</div>
+<div class="form-group">
+	<label>Name</label>
+	<InputText class="form-control" @bind-Value="model.Name"/>
+</div>
+
+<div class="form-group">
+	<label>Price</label>
+	<InputText class="form-control" @bind-Value="model.Price"/>
+</div>
+
+<div class="form-group">
+	<label>Rarity</label>
+	<InputText class="form-control" @bind-Value="model.Rarity"/>
+</div>
+
+<div class="form-group">
+	<label>Properties</label>
+	<InputText class="form-control" @bind-Value="model.properties" />
+</div>
+
+<div class="form-group">
+	<label>Magic</label>
+	<InputText class="form-control" @bind-Value="model.MagicID" />
+</div>
+
+<div class="form-group">
+	<label>Quantity</label>
+	<InputText class="form-control" @bind-Value="model.quantity" />
+</div>
+		<InputSelect class="form-control" @bind-Value="model.CategoryId">
+		@foreach (var magic in magics)
+		{
+			<option value="@magic.Id">@Magic.Description</option>
+		}
+		</InputSelect>
+		@if (magics == null)
+		{
+			<p><em>Loading...</em></p>
+		}else{}
+<button type="submit" class="btn btn-primary btn-block mt-5">Submit</button>
+@code {
+	private ArmorCreate model = new();
+	private IEnumerable<MagicListItem> magics;
+	private string errorMessage;
+	protected override async Task OnInitializedAsync()
+	{
+		magics = await http.GetFromJsonAsync<IEnumerable<MagicListItem>>("/api/magic/");
+	}
+	private async void HandleSubmit()
+	{
+		var createRes = await http.PostAsJsonAsync<ArmorCreate>("/api/Armor/", model);
+		if (createRes.IsSuccessStatusCode)
+		{
+			navigation.NavigateTo("/Armor");
+		}
+		else
+		{
+			errorMessage = "Could not forge your armor, try again when the forge is relit.";
+		}
+	}
+	}

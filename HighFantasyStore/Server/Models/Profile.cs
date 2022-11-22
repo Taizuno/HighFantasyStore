@@ -9,9 +9,11 @@ namespace HighFantasyStore.Server.Models
         [Key]
         public int id { get; set; }
         [ForeignKey("owner")]
-        public int ownerId { get; set; }
+        public string ownerId { get; set; }
         public int gold { get; set; }
+        [ForeignKey("Weapons")]
         public List<Weapon> WeaponsOwned { get; set; }
+        [ForeignKey("Armors")]
         public List<Armor> ArmorOwned { get; set; }
 
     }
