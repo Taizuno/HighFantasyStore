@@ -1,0 +1,41 @@
+﻿@page "/Weapon/delete/{WeaponId:int}"
+@using HighFantasyStore.Shared.Models.Weapons
+@attribute [Authorize]
+@inject HttpClient http
+@inject NavigationManager navigation
+<h3>#@WeaponId</h3>
+@if(message != null)
+{
+	<h2 class="text-danger">@message</h2>
+}
+@if (Weapon != null)
+{
+
+}
+else
+{
+	<p>Loading...</p>
+}
+@code {
+	[Parameter]
+	public int WeaponId { get; set; }
+	public WeaponsListItem Weapon {get; set;}
+	public string message { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		Weapon = await http.GetFromJsonAsync<WeaponsListItem>($"/api/Weapon/{WeaponId}");
+	}
+	private async void HandleClick()
+	{
+		var deleteRes = await http.DeleteAsync($"/api/Weapon/{WeaponId}");
+		if(deleteRes.IsSuccessStatusCode)
+		{
+			navigation.NavigateTo("/Weapon");
+		}
+		else
+		{
+			message = "Failed to scrap your Weapon.";
+		}
+	}
+}

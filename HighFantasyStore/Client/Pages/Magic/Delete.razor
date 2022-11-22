@@ -1,0 +1,41 @@
+﻿@page "/Armor/delete/{ArmorId:int}"
+@using HighFantasyStore.Shared.Models.Armors
+@attribute [Authorize]
+@inject HttpClient http
+@inject NavigationManager navigation
+<h3>#@ArmorId</h3>
+@if(message != null)
+{
+	<h2 class="text-danger">@message</h2>
+}
+@if (Armor != null)
+{
+
+}
+else
+{
+	<p>Loading...</p>
+}
+@code {
+	[Parameter]
+	public int ArmorId { get; set; }
+	public ArmorListItem Armor {get; set;}
+	public string message { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		Armor = await http.GetFromJsonAsync<ArmorListItem>($"/api/Armor/{ArmorId}");
+	}
+	private async void HandleClick()
+	{
+		var deleteRes = await http.DeleteAsync($"/api/Armor/{ArmorId}");
+		if(deleteRes.IsSuccessStatusCode)
+		{
+			navigation.NavigateTo("/Armor");
+		}
+		else
+		{
+			message = "Failed to scrap your armor.";
+		}
+	}
+}

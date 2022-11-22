@@ -1,0 +1,48 @@
+﻿@page "/Weapon/{WeaponId:int}"
+@using HighFantasyStore.Shared.Models.Weapons
+@attribute [Authorize]
+@inject HttpClient http
+
+<h3>#@Weapon.Name</h3>
+<td>
+	<a href=@($"Weapon/{Weapon.Id}")>Details</a>
+	<a href=@($"Weapon/edit/{Weapon.Id}")>Edit</a>
+	<a href=@($"Weapon/delete/{Weapon.Id}")>Delete</a>
+</td>
+@if (Weapon != null)
+{
+	<div class="container">
+		<div class="card">
+			<div class="card-header d-flex justify-content-between">
+				<span>Weapon #@Weapon.Id</span>
+				<span class="text-muted"><strong>@Weapon.MagicID</strong></span>
+			</div>
+			<div class="card-body">
+				<h4 class="card-title">@Weapon.Name</h4>
+				<p class="card-text">@Weapon.Price</p>
+			</div>
+			<div class="card-footer text-muted d-flex justify-content-between">
+				<span class="text-left">@Weapon.properties</span>
+			</div>
+		</div>
+		<div class="d-flex justify-content-center mt-3">
+			<div class="text-center justify-content-between w-25">
+				<a href=@($"/Weapon/edit/{Id}") class="btn btn-outline-primary">Edit</a>
+				<a href=@($"/Weapon/delete/{Id}") class="btn btn-outline-danger">Delete</a>
+				<hr />
+				<a href="/note">Back to Weapon Index</a>
+			</div>
+		</div>
+	</div>
+}
+@code {
+	[Parameter]
+	public int WeaponId { get; set; }
+	public WeaponsListItem Weapon { get; set; }
+
+	protected override async Task OnInitializedAsync()
+	{
+		Weapon = await http.GetFromJsonAsync<WeaponsListItem>($"api/Weapon/{WeaponId}");
+	}
+
+}

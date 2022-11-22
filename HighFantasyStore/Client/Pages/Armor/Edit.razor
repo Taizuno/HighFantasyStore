@@ -1,10 +1,10 @@
-﻿@page "/Armor/Create"
+﻿@page "/Armor/edit/{ArmorId:int}"
 @using HighFantasyStore.Shared.Models.Armors
 @attribute [Authorize]
 @inject HttpClient http
 @using HighFantasyStore.Shared.Models.Magics
 @inject NavigationManager navigation
-<h3>Create</h3>
+<h3>Edit Armor : @model.Name</h3>
 @if(errorMessage != null)
 {
 	<h5 class="text-danger">@errorMessage</h5>
@@ -56,23 +56,26 @@
 		}else{}
 <button type="submit" class="btn btn-primary btn-block mt-5">Submit</button>
 @code {
-	private ArmorCreate model = new();
+	[Parameter]
+	public int ArmorId { get; set; }
+	private ArmorEdit model{ get; set; }
 	private IEnumerable<MagicListItem> magics;
 	private string errorMessage;
 	protected override async Task OnInitializedAsync()
 	{
 		magics = await http.GetFromJsonAsync<IEnumerable<MagicListItem>>("/api/magic/");
+		model = await http.GetFromJsonAsync<ArmorEdit>($"/api/Armor/{ArmorId}");
 	}
 	private async void HandleSubmit()
 	{
-		var createRes = await http.PostAsJsonAsync<ArmorCreate>("/api/Armor/", model);
+		var createRes = await http.PostAsJsonAsync<ArmorCreate>("/api/Armor/edit/{ArmorId}", model);
 		if (createRes.IsSuccessStatusCode)
 		{
-			navigation.NavigateTo("/Armor");
+			navigation.NavigateTo("/Armor/{ArmorId}");
 		}
 		else
 		{
-			errorMessage = "Could not forge your armor, try again when the forge is relit.";
+			errorMessage = "Could not reforge your armor, try again when the forge is relit.";
 		}
 	}
 	}

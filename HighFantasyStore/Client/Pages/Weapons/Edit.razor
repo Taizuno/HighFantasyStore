@@ -1,5 +1,5 @@
-﻿@page "/Armor/Create"
-@using HighFantasyStore.Shared.Models.Armors
+﻿@page "/Weapon/Create"
+@using HighFantasyStore.Shared.Models.Weapons
 @attribute [Authorize]
 @inject HttpClient http
 @using HighFantasyStore.Shared.Models.Magics
@@ -56,7 +56,7 @@
 		}else{}
 <button type="submit" class="btn btn-primary btn-block mt-5">Submit</button>
 @code {
-	private ArmorCreate model = new();
+	private WeaponCreate model = new();
 	private IEnumerable<MagicListItem> magics;
 	private string errorMessage;
 	protected override async Task OnInitializedAsync()
@@ -65,14 +65,14 @@
 	}
 	private async void HandleSubmit()
 	{
-		var createRes = await http.PostAsJsonAsync<ArmorCreate>("/api/Armor/", model);
+		var createRes = await http.PostAsJsonAsync<WeaponCreate>("/api/Weapon/", model);
 		if (createRes.IsSuccessStatusCode)
 		{
-			navigation.NavigateTo("/Armor");
+			navigation.NavigateTo("/Weapon");
 		}
 		else
 		{
-			errorMessage = "Could not forge your armor, try again when the forge is relit.";
+			errorMessage = "Could not forge your Weapon, try again when the forge is relit.";
 		}
 	}
 	}
