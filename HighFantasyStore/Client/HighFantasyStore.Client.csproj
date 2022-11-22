@@ -25,4 +25,10 @@
     <ProjectReference Include="..\Shared\HighFantasyStore.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Armor\" />
+    <Folder Include="Pages\Profile\" />
+    <Folder Include="Pages\Weapons\" />
+  </ItemGroup>
+
 </Project>

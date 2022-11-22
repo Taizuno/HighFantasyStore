@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HighFantasyStore.Server", "HighFantasyStore\Server\HighFantasyStore.Server.csproj", "{796A4F74-0D3D-40C5-8FAA-F283A971FCFE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HighFantasyStore.Server", "HighFantasyStore\Server\HighFantasyStore.Server.csproj", "{796A4F74-0D3D-40C5-8FAA-F283A971FCFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HighFantasyStore.Client", "HighFantasyStore\Client\HighFantasyStore.Client.csproj", "{E9746FA7-4F1B-49ED-947A-35BC2986CB8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HighFantasyStore.Client", "HighFantasyStore\Client\HighFantasyStore.Client.csproj", "{E9746FA7-4F1B-49ED-947A-35BC2986CB8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HighFantasyStore.Shared", "HighFantasyStore\Shared\HighFantasyStore.Shared.csproj", "{270EB56A-B600-4E70-B416-855E30494F92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HighFantasyStore.Shared", "HighFantasyStore\Shared\HighFantasyStore.Shared.csproj", "{270EB56A-B600-4E70-B416-855E30494F92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

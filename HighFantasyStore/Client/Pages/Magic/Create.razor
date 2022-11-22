@@ -1,0 +1,39 @@
+﻿@page"/magic/create"
+@attribute [Authorize]
+@inject HttpClient http
+@using HighFantasyStore.Shared.Models.Magics
+@inject NavigationManager navigation
+@if (errorMessage != null)
+{
+    <h5 class="text-danger">@errorMessage</h5>
+}
+<div class="container">
+    <EditForm Model="@model" OnValidSubmit="@HandleSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    </EditForm>
+    <div class="form-group">
+            <label>Description</label>
+            <InputText class="form-control" @bind-Value="model.Description" />
+    </div>
+    <button type="submit" class="btn btn-primary btn-block mt-5">Submit</button>
+</div>
+<h3>Create</h3>
+
+@code {
+    private MagicCreate model = new();
+    private string errorMessage;
+    private async void HandleSubmit()
+    {
+        var createRes = await http.PostAsJsonAsync<MagicCreate>("api/Magic", model);
+        if(createRes.IsSuccessStatusCode)
+        {
+            navigation.NavigateTo("/magic");
+        }
+        else
+        {
+            errorMessage = "Could not create your magic effect, please try again later.";
+        }
+    }
+    
+}

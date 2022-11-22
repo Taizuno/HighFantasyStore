@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HighFantasyStore.Server.Services.Magics;
+using HighFantasyStore.Shared.Models.Magics;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +10,60 @@ namespace HighFantasyStore.Server.Controllers
     [ApiController]
     public class MagicController : ControllerBase
     {
+        private readonly IMagicServices _magicServices;
+
+        public MagicController(IMagicServices magicServices)
+        {
+            _magicServices = magicServices;
+        }
+
+
         // GET: api/<MagicController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<List<MagicListItem>> Index()
         {
-            return new string[] { "value1", "value2" };
+            var magic = await _magicServices.GetAllMagicAsync();
+            return magic.ToList();
         }
 
         // GET api/<MagicController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Magic(int id)
         {
-            return "value";
+           var magic = await _magicServices.GetMagicByIdAsync(id);
+            if (magic == null) return NotFound();
+            return Ok(magic);
         }
 
         // POST api/<MagicController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> CreateMagic(MagicCreate magic)
         {
+            if (magic == null) return BadRequest();
+            bool wasSuccesful = await _magicServices.CreateMagicAsync(magic);
+            if (wasSuccesful) return Ok();
+            else return UnprocessableEntity();
         }
 
         // PUT api/<MagicController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Edit(MagicEdit magic)
         {
+            if(magic == null) return BadRequest();
+            bool wasSuccesful = await _magicServices.UpdateMagicAsync(magic);
+            if(wasSuccesful) return Ok();
+            return BadRequest();
         }
 
         // DELETE api/<MagicController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            var magic = _magicServices.GetMagicByIdAsync(id);
+            if(magic == null) return NotFound();
+            bool wasSuccesful = await _magicServices.DeleteMagicAsync(id);
+            if (!wasSuccesful) return BadRequest();
+            return Ok();
         }
     }
 }

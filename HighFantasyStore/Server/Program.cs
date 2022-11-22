@@ -1,5 +1,9 @@
 using HighFantasyStore.Server.Data;
 using HighFantasyStore.Server.Models;
+using HighFantasyStore.Server.Services.Armors;
+using HighFantasyStore.Server.Services.Magics;
+using HighFantasyStore.Server.Services.Profiles;
+using HighFantasyStore.Server.Services.Weapons;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +27,10 @@ builder.Services.AddAuthentication()
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Services.AddScoped<IMagicServices, MagicServices>();
+builder.Services.AddScoped<IWeaponsServices, WeaponsServices>();
+builder.Services.AddScoped<IArmorServices, ArmorServices>();
+builder.Services.AddScoped<IProfileServices, ProfileServices>();
 
 var app = builder.Build();
 
